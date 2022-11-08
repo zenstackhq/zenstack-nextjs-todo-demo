@@ -42,5 +42,5 @@ model List {
     @@allow('all', auth() == owner)
 
     // can be read by anyone if is public 
-    @@allow('read', owner == auth() || !private)
+    @@allow('read', !private)
 }
