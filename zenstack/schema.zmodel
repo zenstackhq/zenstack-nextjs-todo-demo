@@ -1,0 +1,24 @@
+datasource db {
+    provider = 'postgresql'
+    url = env('DATABASE_URL')
+}
+
+/*
+ * User model
+ */
+model User {
+  id String @id @default(cuid())
+  email String @unique
+  emailVerified DateTime?
+  // @password indicates the field is a password and its
+  // value should be hashed (with bcrypt) before storing
+  // @omit indicates the field should not be returned on read
+  password String @password @omit
+  name String?
+
+  // everybody can signup
+  @@allow('create', true)
+
+  // can only be updated and deleted by self
+  @@allow('read,update,delete', auth() == this)
+  }
