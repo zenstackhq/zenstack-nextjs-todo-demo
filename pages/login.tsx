@@ -1,9 +1,23 @@
 import React, { useState } from "react";
 import { getCsrfToken, signIn } from "next-auth/react";
-import { Text, Button, Input, Tabs, TabList, TabPanels, Tab, TabPanel, ChakraProvider } from "@chakra-ui/react";
+import {
+  Text,
+  Button,
+  Input,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  ChakraProvider,
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+} from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { useUser } from "@zenstackhq/runtime/hooks";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 
 const Login: React.FC<{ csrfToken: string }> = ({ csrfToken }) => {
   const [name, setName] = useState("");
@@ -11,6 +25,9 @@ const Login: React.FC<{ csrfToken: string }> = ({ csrfToken }) => {
   const [password, setPassword] = useState("");
 
   const { create: signup } = useUser();
+
+  const router = useRouter();
+  const error = router.query["error"];
 
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -40,6 +57,12 @@ const Login: React.FC<{ csrfToken: string }> = ({ csrfToken }) => {
   };
   return (
     <ChakraProvider>
+      {error && (
+        <Alert status="error" alignItems="center" justifyContent="center" textAlign="center">
+          <AlertIcon />
+          <AlertTitle>Sign in failed. Check the details you provided are correct.</AlertTitle>
+        </Alert>
+      )}
       <div className="flex justify-center items-center h-screen bg-gray-100">
         <Tabs className="w-96 p-5 border rounded-lg bg-white">
           <Text fontSize="3xl" textAlign="center" className="py-8" fontWeight="extrabold">
