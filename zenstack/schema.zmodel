@@ -15,6 +15,7 @@ model User {
   // @omit indicates the field should not be returned on read
   password String @password @omit
   name String?
+  list List[]
 
   // everybody can signup
   @@allow('create', true)
@@ -22,3 +23,24 @@ model User {
   // can only be updated and deleted by self
   @@allow('read,update,delete', auth() == this)
   }
+
+/*
+ * Todo list model
+ */
+model List {
+    id String @id @default(uuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    title String
+    private Boolean @default(false)
+    ownerId String
+    owner User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+    // require login
+    @@deny('all', auth() == null)
+    // owner has full access
+    @@allow('all', auth() == owner)
+
+    // can be read by anyone if is public 
+    @@allow('read', owner == auth() || !private)
+}
