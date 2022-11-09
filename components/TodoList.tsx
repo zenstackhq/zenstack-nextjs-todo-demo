@@ -33,7 +33,7 @@ export default function TodoList({ value }: Props) {
       <Link href={`${router.asPath}/list/${value.id}`}>
         <a>
           <figure>
-            <Image src={`https://picsum.photos/300/200?r=${value.title}`} width={320} height={200} alt="Cover" />
+            <Image src={`https://picsum.photos/300/200?r=${value.id}`} width={320} height={200} alt="Cover" />
           </figure>
         </a>
       </Link>
