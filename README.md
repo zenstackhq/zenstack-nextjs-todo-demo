@@ -1,13 +1,27 @@
-This is a starter project for using [ZenStack](https://github.com/zenstackhq/zenstack) with [Next.js](https://nextjs.org/) and [Next Auth](https://next-auth.js.org/).
+<div align="center">
+    <img src="https://user-images.githubusercontent.com/16688722/200902374-fa2a77ea-376d-4b91-825f-25184ebcc41b.png" height="256">
+    <h1>ZenStack Todo Demo</h1>
+    <a href="https://twitter.com/intent/tweet?text=Wow%20%40zenstackhq">
+        <img src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fzenstackhq%2Fzenstack">
+    </a>
+    <a href="https://discord.gg/6HhebQynfz">
+        <img src="https://img.shields.io/discord/1035538056146595961">
+    </a>
+</div>
+## Overview
 
-It's extended from [Prisma's Next.js Starter](https://github.com/prisma/prisma-examples/tree/latest/typescript/rest-nextjs-api-routes).
+This is an example to show how to create a simple collaborative Todo web app below with the ZenStack library using Next.js
+
+The deployed version can be found at https://zenstack-nextjs-todo-demo.vercel.app
 
 ## Getting Started
 
-First create a project from this starter:
+Clone the repository and install dependencies
 
 ```bash
-npx create-next-app [project-name] --use-npm -e https://github.com/zenstackhq/nextjs-auth-postgres-template
+git clone https://github.com/zenstackhq/zenstack-nextjs-todo-demo.git
+cd zenstack-nextjs-todo-demo
+npm install
 
 cd [project-name]
 ```
