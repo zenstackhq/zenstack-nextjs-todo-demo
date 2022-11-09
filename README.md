@@ -1,13 +1,11 @@
-This is a starter project for using [ZenStack](https://github.com/zenstackhq/zenstack) with [Next.js](https://nextjs.org/) and [Next Auth](https://next-auth.js.org/).
-
-It's extended from [Prisma's Next.js Starter](https://github.com/prisma/prisma-examples/tree/latest/typescript/rest-nextjs-api-routes).
-
 ## Getting Started
 
-First create a project from this starter:
+Clone the repository and install dependencies
 
 ```bash
-npx create-next-app [project-name] --use-npm -e https://github.com/zenstackhq/nextjs-auth-postgres-template
+git clone https://github.com/zenstackhq/zenstack-nextjs-todo-demo.git
+cd zenstack-nextjs-todo-demo
+npm install
 
 cd [project-name]
 ```
