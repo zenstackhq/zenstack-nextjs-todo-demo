@@ -20,8 +20,11 @@ model User {
   // everybody can signup
   @@allow('create', true)
 
+  // can be read by other users
+  @@allow('read', auth() != null)
+
   // can only be updated and deleted by self
-  @@allow('read,update,delete', auth() == this)
+  @@allow('update,delete', auth() == this)
   }
 
 /*
