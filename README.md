@@ -8,6 +8,7 @@
         <img src="https://img.shields.io/discord/1035538056146595961">
     </a>
 </div>
+
 ## Overview
 
 This is an example to show how to create a simple collaborative Todo web app below with the ZenStack library using Next.js
