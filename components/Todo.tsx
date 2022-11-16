@@ -2,6 +2,7 @@ import { TrashIcon } from "@heroicons/react/24/outline";
 import { useTodo } from "@zenstackhq/runtime/hooks";
 import { Todo, User } from "@zenstackhq/runtime/types";
 import { ChangeEvent, useEffect, useState } from "react";
+import { notAuthorizedList } from "../lib/error";
 import Avatar from "./Avatar";
 import TimeInfo from "./TimeInfo";
 
@@ -19,18 +20,27 @@ export default function Component({ value, updated, deleted }: Props) {
     if (!!value.completedAt !== completed) {
       update(value.id, {
         data: { completedAt: completed ? new Date() : null },
-      }).then((newValue) => {
-        if (updated && newValue) {
-          updated(newValue);
-        }
-      });
+      })
+        .then((newValue: any) => {
+          if (updated && newValue) {
+            updated(newValue);
+          }
+        })
+        .catch((error: any) => {
+          notAuthorizedList();
+          setCompleted(!completed);
+        });
     }
   });
 
   const deleteTodo = async () => {
-    await del(value.id);
-    if (deleted) {
-      deleted(value);
+    try {
+      await del(value.id);
+      if (deleted) {
+        deleted(value);
+      }
+    } catch (error: any) {
+      notAuthorizedList();
     }
   };
 

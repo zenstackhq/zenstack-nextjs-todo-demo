@@ -4,6 +4,7 @@ import { PlusIcon } from "@heroicons/react/24/outline";
 import { ChangeEvent, KeyboardEvent, useState } from "react";
 import { useCurrentUser } from "@lib/context";
 import TodoComponent from "components/Todo";
+import { notAuthorizedList } from "../../../lib/error";
 
 export default function TodoList() {
   const user = useCurrentUser();
@@ -30,15 +31,21 @@ export default function TodoList() {
   }
 
   const _createTodo = async () => {
-    const todo = await createTodo({
-      data: {
-        title,
-        ownerId: user!.id,
-        listId: list!.id,
-      },
-    });
-    console.log(`Todo created: ${todo}`);
-    setTitle("");
+    try {
+      const todo = await createTodo({
+        data: {
+          title,
+          ownerId: user!.id,
+          listId: list!.id,
+        },
+      });
+      console.log(`Todo created: ${todo}`);
+      setTitle("");
+    } catch (error: any) {
+      if (error.status == 403) {
+        notAuthorizedList();
+      }
+    }
   };
 
   return (

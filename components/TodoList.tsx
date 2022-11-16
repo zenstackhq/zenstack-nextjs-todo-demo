@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useList } from "@zenstackhq/runtime/hooks";
 import TimeInfo from "./TimeInfo";
+import { notAuthorizedList } from "../lib/error";
 
 type Props = {
   value: List & { owner: User };
@@ -22,7 +23,7 @@ export default function TodoList({ value }: Props) {
         await del(value.id);
       } catch (error: any) {
         if (error.status == 403) {
-          alert("You are now allowed to do so");
+          notAuthorizedList();
         }
       }
     }
@@ -30,7 +31,7 @@ export default function TodoList({ value }: Props) {
 
   return (
     <div className="card w-80 bg-base-100 shadow-xl cursor-pointer hover:bg-gray-50">
-      <Link href={`${router.asPath}/list/${value.id}`}>
+      <Link href={`${router.asPath}list/${value.id}`}>
         <a>
           <figure>
             <Image src={`https://picsum.photos/300/200?r=${value.id}`} width={320} height={200} alt="Cover" />
@@ -38,7 +39,7 @@ export default function TodoList({ value }: Props) {
         </a>
       </Link>
       <div className="card-body">
-        <Link href={`${router.asPath}/${value.id}`}>
+        <Link href={`${router.asPath}${value.id}`}>
           <a>
             <h2 className="card-title line-clamp-1">{value.title || "Missing Title"}</h2>
           </a>
